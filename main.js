@@ -15,9 +15,9 @@ function createPost() {
     var post = {
         text: textPost,
         id: postId.length,
-        comments:{
-            commentPoster:"",
-            commentText:""
+        comments: {
+            commentPoster: "",
+            commentText: ""
         }
     }
     posts.push(post);
@@ -28,18 +28,20 @@ function createPost() {
 
 
 function renderPosts() {
-    var commentForm = "<div class='form-group'><form><input type= 'text'id='comment-user' class='form-control' placeholder='enter name here'><input type='text' id='comment-text' class='form-control' placeholder='enter text here'></form><button type='button' class='add-comment'>Post Comment</button></div>"
+    var commentForm = "<div class='form-group'><form class='comment-form'><input type= 'text'id='comment-user' class='form-control' placeholder='enter name here'><input type='text' id='comment-text' class='form-control' placeholder='enter text here'></form><button type='button' class='add-comment'>Post Comment</button></div>"
     $('#post-name').val('')
     $('.posts').find('p').remove();
     for (i = 0; i < posts.length; i++) {
-    $('.posts').append("<p class= post data-id=" + posts[i].id + ">" + "<button type='button' class='remove'>REMOVE</button>" + posts[i].text + "</p>" + "<span class='comment'>" + posts[i].comments.commentPoster + "    " + posts[i].comments.commentText + "</span>")
+        $('.posts').append("<p class= post data-id=" + posts[i].id + ">" + "<button type='button' class='remove'>REMOVE</button>" + posts[i].text + "</p>" + "<span class='comment'>" + posts[i].comments.commentPoster + "    " + posts[i].comments.commentText + "</span>")
     }
     $('.posts').find('p').append(commentForm)
 }
 
+// 
+
 
 // click handler for posting
-$('form').on('click', '.add-post',  function () {
+$('form').on('click', '.add-post', function () {
     createPost();
 })
 
@@ -53,4 +55,3 @@ $('.posts').on('click', '.remove', function () {
     renderPosts();
 })
 // clicker for adding comments
-// $('.posts').on('click', 'add-comment' function(){})
