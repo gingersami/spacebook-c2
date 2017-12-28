@@ -1,6 +1,9 @@
+"use strict";
+
 var posts = [];
 var postId = []
 var idCounter = 0
+var comments =[]
 
 function generateId() {
     idCounter++
@@ -15,24 +18,40 @@ function createPost() {
     var post = {
         text: textPost,
         id: postId.length,
-        comments: {
-            commentPoster: "",
-            commentText: ""
-        }
     }
     posts.push(post);
     renderPosts()
+}
+
+function createComment(){
+    var parentId = $(this).closest('form').find('p').data().id
+    var textCom = $(this).val();
+    var userCom = $(this).val();
+    generateId();
+    var comment={
+        text:textCom,
+        user:userCom,
+        commentId:postId.length,
+        postId:parentId
+
+    }
+    comments.push(comment)
+}
+function renderComments(){
+    for (i=0;i<comments.length;i++){
+        $('.posts').append("<p>" + comments[i].text + "</p>")
+    }
 }
 
 
 
 
 function renderPosts() {
-    var commentForm = "<div class='form-group'><form class='comment-form'><input type= 'text'id='comment-user' class='form-control' placeholder='enter name here'><input type='text' id='comment-text' class='form-control' placeholder='enter text here'></form><button type='button' class='add-comment'>Post Comment</button></div>"
+    var commentForm = "<div class='form-group'><form class='comment-form'><input type= 'text'id='comment-user' class='form-control' placeholder='enter name here'><input type='text' id='comment-text' class='form-control' placeholder='enter text here'><button type='button' class='add-comment'>Post Comment</button></form></div>"
     $('#post-name').val('')
     $('.posts').find('p').remove();
-    for (i = 0; i < posts.length; i++) {
-        $('.posts').append("<p class= post data-id=" + posts[i].id + ">" + "<button type='button' class='remove'>REMOVE</button>" + posts[i].text + "</p>" + "<span class='comment'>" + posts[i].comments.commentPoster + "    " + posts[i].comments.commentText + "</span>")
+    for (let i = 0; i < posts.length; i++) {
+        $('.posts').append("<p class= post data-id=" + posts[i].id + ">" + "<button type='button' class='remove'>REMOVE</button>" + posts[i].text + "</p>")
     }
     $('.posts').find('p').append(commentForm)
 }
@@ -55,3 +74,6 @@ $('.posts').on('click', '.remove', function () {
     renderPosts();
 })
 // clicker for adding comments
+// ('.comment-form').on('click', '.add-comment', function(){
+//     renderComments();
+// })
