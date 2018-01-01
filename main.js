@@ -76,4 +76,4 @@ $('.posts').on('click', '.remove', function () {
 // clicker for adding comments
 // ('.comment-form').on('click', '.add-comment', function(){
 //     renderComments();
-// })
+// })dsads
