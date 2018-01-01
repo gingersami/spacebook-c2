@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
   <title></title>
 </head>
+
 <body>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -26,8 +28,16 @@
       </form>
     </div>
   </div>
+  <script id="posts-template" type="text/x-handlebars-template"><p class='post' data-id={{id}}>
+    <button type='button' class='remove'>REMOVE</button> {{text}}</p>
+
+
+
+  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
   <script src="main.js"></script>
 </body>
+
 </html>
 <!--  -->

@@ -1,9 +1,10 @@
 "use strict";
-
+var source = $('#posts-template').html();
+var template = Handlebars.compile(source);
 var posts = [];
 var postId = []
 var idCounter = 0
-var comments =[]
+var comments = []
 
 function generateId() {
     idCounter++
@@ -23,22 +24,23 @@ function createPost() {
     renderPosts()
 }
 
-function createComment(){
+function createComment() {
     var parentId = $(this).closest('form').find('p').data().id
     var textCom = $(this).val();
     var userCom = $(this).val();
     generateId();
-    var comment={
-        text:textCom,
-        user:userCom,
-        commentId:postId.length,
-        postId:parentId
+    var comment = {
+        text: textCom,
+        user: userCom,
+        commentId: postId.length,
+        postId: parentId
 
     }
     comments.push(comment)
 }
-function renderComments(){
-    for (i=0;i<comments.length;i++){
+
+function renderComments() {
+    for (i = 0; i < comments.length; i++) {
         $('.posts').append("<p>" + comments[i].text + "</p>")
     }
 }
@@ -47,13 +49,16 @@ function renderComments(){
 
 
 function renderPosts() {
-    var commentForm = "<div class='form-group'><form class='comment-form'><input type= 'text'id='comment-user' class='form-control' placeholder='enter name here'><input type='text' id='comment-text' class='form-control' placeholder='enter text here'><button type='button' class='add-comment'>Post Comment</button></form></div>"
+    // var commentForm = "<div class='form-group'><form class='comment-form'><input type= 'text'id='comment-user' class='form-control' placeholder='enter name here'><input type='text' id='comment-text' class='form-control' placeholder='enter text here'><button type='button' class='add-comment'>Post Comment</button></form></div>"
     $('#post-name').val('')
     $('.posts').find('p').remove();
     for (let i = 0; i < posts.length; i++) {
-        $('.posts').append("<p class= post data-id=" + posts[i].id + ">" + "<button type='button' class='remove'>REMOVE</button>" + posts[i].text + "</p>")
+        var newHTML = template(posts[i])
+
+        $('.posts').append(newHTML)
     }
-    $('.posts').find('p').append(commentForm)
+
+    // $('.posts').find('p').append(commentForm)
 }
 
 // 
